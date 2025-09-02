@@ -26,9 +26,9 @@
                                     <td>{{ $item->label }}</td>
                                     <td>{{ $item->rak }}</td>
                                     <td>
-                                        <a href="{{ route('lokasi.edit', $item->id) }}" class="btn btn-succes">Edit</a>
-                                        <form action="{{ route('lokasi.destroy', $item->id) }}" method="post"
-                                            style="display: inline" onclick="return confirm('yakin ingin delete ?')">
+                                        <a href="" class="btn btn-succes">Edit</a>
+                                        <form action="" method="post" style="display: inline"
+                                            onclick="return confirm('yakin ingin delete ?')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger" type="submit">Delete</button>

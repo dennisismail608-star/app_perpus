@@ -29,6 +29,11 @@
                         <i class="bi bi-circle"></i><span>Kategori Buku</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/buku/index') }}">
+                        <i class="bi bi-circle"></i><span>Buku</span>
+                    </a>
+                </li>
                 {{--
                 <li>
                     <a href="{{ route('categories.index') }}">

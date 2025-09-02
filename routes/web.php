@@ -4,6 +4,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BookController;
 use App\Models\category;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,7 @@ Route::middleware('auth')->group(function () {
     route::post('logout', [LoginController::class, 'logout']);
 
     //Anggota:
-    route::get('anggota/index', [\App\Http\Controllers\AnggotaController::class, 'index']);
+    route::get('anggota/index', [AnggotaController::class, 'index']);
     route::get('anggota/create', [AnggotaController::class, 'create']);
     route::get('anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota.edit');
     route::put('anggota/update/{id}', [AnggotaController::class, 'update'])->name('anggota.update');
@@ -46,4 +47,11 @@ Route::middleware('auth')->group(function () {
     route::put('kategori/update/{id}', [categoryController::class, 'update'])->name('kategori.update');
     route::post('kategori/store', [categoryController::class, 'store'])->name('kategori.store');
     route::delete('kategori/destroy/{id}', [categoryController::class, 'destroy'])->name('kategori.destroy');
+
+    //buku
+    route::get('buku/index', [BookController::class, 'index']);
+    route::get('buku/create', [BookController::class, 'create']);
+    route::get('buku/edit', [BookController::class, 'edit'])->name('buku.edit');
+    route::post('buku/store', [BookController::class, 'store'])->name('buku.store');
+    route::delete('buku/destroy/{id}', [BookController::class, 'destroy'])->name('buku.destroy');
 });

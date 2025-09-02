@@ -16,4 +16,14 @@ class book extends Model
         'keterangan',
         'stock'
     ];
+
+    public function lokasi()
+    {
+        return $this->belongsTo(location::class, 'id_lokasi', 'id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(category::class, 'id_category', 'id');
+    }
 }
