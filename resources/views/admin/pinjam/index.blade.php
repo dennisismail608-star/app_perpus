@@ -17,7 +17,7 @@
                             <th>No Peminjaman</th>
                             <th>Anggota</th>
                             <th>Tanggal Kembali</th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>

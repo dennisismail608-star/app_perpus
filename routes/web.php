@@ -51,4 +51,5 @@ Route::middleware('auth')->group(function () {
     route::put('buku/update/{id}', [\App\Http\Controllers\BookController::class, 'update'])->name('buku.update');
 
     Route::resource('transaction', \App\Http\Controllers\TransactionController::class);
+    route::get('get-buku/{id}',[\App\Http\Controllers\TransactionController::class, 'getBukuByIdCategory']);
 });
