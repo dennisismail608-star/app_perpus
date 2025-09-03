@@ -8,7 +8,7 @@ class location extends Model
 {
     protected $fillable = [
         'kode_lokasi',
-         'label',
-         'rak'
+        'label',
+        'rak'
     ];
 }

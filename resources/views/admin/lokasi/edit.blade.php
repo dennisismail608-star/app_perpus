@@ -1,5 +1,5 @@
 @extends('app')
-@section('title', 'edit')
+@section('title', 'Location of Books')
 @section('content')
     <div class="card">
         <div class="card-header">
@@ -7,20 +7,16 @@
         </div>
         <div class="card-body">
             <div>
-                <div class="card-body">
-                    <div>
-                        <ul style="background-color: red">
-                            @foreach ($errors->all() as $item)
-                                <li>{{ $item }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
+                <ul style="background-color: red">
+                    @foreach ($errors->all() as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
+                </ul>
             </div>
             <form action="{{ route('lokasi.update', $location->id) }}" method="post">
                 @csrf
                 @method('PUT')
-                <label for="" class="fom-label">Kode Lokasi</label>
+                <label for="" class="form-label">Kode Lokasi</label>
                 <input type="text" class="form-control" name="kode_lokasi" value="{{ $location->kode_lokasi }}">
 
                 <label for="" class="form-label">Label</label>
@@ -29,7 +25,7 @@
                 <label for="" class="form-label">Rak Buku</label>
                 <input type="text" class="form-control" name="rak" value="{{ $location->rak }}">
 
-                <button type="submit" class="btn btn-primary mt-3 mb-2">Kirim</button>
+                <button type="submit" class="btn btn-primary mt-2">Kirim</button>
             </form>
         </div>
     </div>

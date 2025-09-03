@@ -6,7 +6,6 @@ use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 class CategoryController extends Controller
 {
     /**
@@ -61,7 +60,7 @@ class CategoryController extends Controller
     {
         $category = category::find($id);
         $rules = [
-            'nama_kategori' => ['required']
+            'nama_kategori' => ['required'],
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -69,7 +68,6 @@ class CategoryController extends Controller
         }
         $category->nama_kategori = $request->nama_kategori;
         $category->save();
-
         return redirect()->to('kategori/index');
     }
 

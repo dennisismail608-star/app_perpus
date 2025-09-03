@@ -15,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = book::orderBy('id', "DESC")->get();
+        $books = book::orderBy('id', 'DESC')->get();
         return view('admin.buku.index', compact('books'));
     }
 
@@ -34,7 +34,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $ruls = [
+        $rules = [
             'id_lokasi' => ['required'],
             'id_kategori' => ['required'],
             'judul' => ['required'],
@@ -44,7 +44,7 @@ class BookController extends Controller
             'keterangan' => ['nullable'],
             'stock' => ['required']
         ];
-        $validator = Validator::make($request->all(), $ruls);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
@@ -75,9 +75,9 @@ class BookController extends Controller
     public function edit(string $id)
     {
         $book = book::find($id);
-        $location = location::all();
-        $category = category::all();
-        return view('admin.buku.edit', compact('book', 'location', 'category'));
+        $locations = location::all();
+        $categories = category::all();
+        return view('admin.buku.edit', compact('book', 'locations', 'categories'));
     }
 
     /**
@@ -85,7 +85,32 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $book = book::find($id);
+        $rules = [
+            'id_lokasi' => ['required'],
+            'id_kategori' => ['required'],
+            'judul' => ['required'],
+            'pengarang' => ['required'],
+            'penerbit' => ['required'],
+            'tahun_terbit' => ['required'],
+            'keterangan' => ['nullable'],
+            'stock' => ['required']
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        $book->id_lokasi = $request->id_lokasi;
+        $book->id_kategori = $request->id_kategori;
+        $book->judul = $request->judul;
+        $book->pengarang = $request->pengarang;
+        $book->penerbit = $request->penerbit;
+        $book->tahun_terbit = $request->tahun_terbit;
+        $book->keterangan = $request->keterangan;
+        $book->stock = $request->stock;
+        $book->save();
+
+        return redirect()->to('buku/index');
     }
 
     /**
@@ -94,7 +119,7 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $book = book::find($id);
-        $book->delete;
+        $book->delete();
 
         return redirect()->to('buku/index');
     }

@@ -2,10 +2,6 @@
 
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BookController;
-use App\Models\category;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,39 +15,40 @@ Route::post('login', [\App\Http\Controllers\LoginController::class, 'actionLogin
 Route::middleware('auth')->group(function () {
     route::get('dashboard', [\App\Http\Controllers\HomeController::class, 'index']);
     route::post('logout', [LoginController::class, 'logout']);
-
     //Anggota:
-    route::get('anggota/index', [AnggotaController::class, 'index']);
+    route::get('anggota/index', [\App\Http\Controllers\AnggotaController::class, 'index']);
     route::get('anggota/create', [AnggotaController::class, 'create']);
+    route::post('anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');
     route::get('anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota.edit');
     route::put('anggota/update/{id}', [AnggotaController::class, 'update'])->name('anggota.update');
     route::get('anggota/restore', [AnggotaController::class, 'indexRestore']);
     route::get('anggota/restore/{id}', [AnggotaController::class, 'restore'])->name('anggota.restore');
-    route::post('anggota/store', [AnggotaController::class, 'store'])->name('anggota.store');
-
     route::delete('anggota/destroy/{id}', [AnggotaController::class, 'softDelete'])->name('anggota.softdelete');
     route::delete('anggota/restore/destroy/{id}', [AnggotaController::class, 'destroy'])->name('anggota.destroy');
 
-    // location
-    route::get('lokasi/index', [LocationController::class, 'index']);
-    route::get('lokasi/create', [LocationController::class, 'create']);
-    route::get('lokasi/edit/{id}', [LocationController::class, 'edit'])->name('lokasi.edit');
-    route::put('lokasi/update/{id}', [LocationController::class, 'update'])->name('lokasi.update');
-    route::post('lokasi/store', [LocationController::class, 'store'])->name('lokasi.store');
-    route::delete('lokasi/destroy/{id}', [LocationController::class, 'destroy'])->name('lokasi.destroy');
+    //Lokasi:
+    route::get('lokasi/index', [\App\Http\Controllers\LocationController::class, 'index']);
+    route::get('lokasi/create', [\App\Http\Controllers\LocationController::class, 'create']);
+    route::post('lokasi/store', [\App\Http\Controllers\LocationController::class, 'store'])->name('lokasi.store');
+    route::get('lokasi/edit/{id}', [\App\Http\Controllers\LocationController::class, 'edit'])->name('lokasi.edit');
+    route::put('lokasi/update/{id}', [\App\Http\Controllers\LocationController::class, 'update'])->name('lokasi.update');
+    route::delete('lokasi/destroy/{id}', [\App\Http\Controllers\LocationController::class, 'destroy'])->name('lokasi.destroy');
 
-    //kategori
-    route::get('kategori/index', [CategoryController::class, 'index']);
-    route::get('kategori/create', [CategoryController::class, 'create']);
-    route::get('kategori/edit/{id}', [categoryController::class, 'edit'])->name('kategori.edit');
-    route::put('kategori/update/{id}', [categoryController::class, 'update'])->name('kategori.update');
-    route::post('kategori/store', [categoryController::class, 'store'])->name('kategori.store');
-    route::delete('kategori/destroy/{id}', [categoryController::class, 'destroy'])->name('kategori.destroy');
+    //Kategori:
+    route::get('kategori/index', [\App\Http\Controllers\CategoryController::class, 'index']);
+    route::get('kategori/create', [\App\Http\Controllers\CategoryController::class, 'create']);
+    route::post('kategori/store', [\App\Http\Controllers\CategoryController::class, 'store'])->name('kategori.store');
+    route::get('kategori/edit/{id}', [\App\Http\Controllers\CategoryController::class, 'edit'])->name('kategori.edit');
+    route::put('kategori/update/{id}', [\App\Http\Controllers\CategoryController::class, 'update'])->name('kategori.update');
+    route::delete('kategori/destroy/{id}', [\App\Http\Controllers\CategoryController::class, 'destroy'])->name('kategori.destroy');
 
-    //buku
-    route::get('buku/index', [BookController::class, 'index']);
-    route::get('buku/create', [BookController::class, 'create']);
-    route::get('buku/edit', [BookController::class, 'edit'])->name('buku.edit');
-    route::post('buku/store', [BookController::class, 'store'])->name('buku.store');
-    route::delete('buku/destroy/{id}', [BookController::class, 'destroy'])->name('buku.destroy');
+    //Buku:
+    route::get('buku/index', [\App\Http\Controllers\BookController::class, 'index']);
+    route::get('buku/create', [\App\Http\Controllers\BookController::class, 'create']);
+    route::post('buku/store', [\App\Http\Controllers\BookController::class, 'store'])->name('buku.store');
+    route::delete('buku/destroy/{id}', [\App\Http\Controllers\BookController::class, 'destroy'])->name('buku.destroy');
+    route::get('buku/edit/{id}', [\App\Http\Controllers\BookController::class, 'edit'])->name('buku.edit');
+    route::put('buku/update/{id}', [\App\Http\Controllers\BookController::class, 'update'])->name('buku.update');
+
+    Route::resource('transaction', \App\Http\Controllers\TransactionController::class);
 });

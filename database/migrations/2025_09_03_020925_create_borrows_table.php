@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('borrows', function (Blueprint $table) {
             $table->id();
-            $table->string('nomor_anggota')->nullable();
-            $table->string('nik')->nullable();
-            $table->string('nama_anggota')->nullable();
-            $table->string('no_hp')->nullable();
-
-            $table->string('email')->unique();
-
+            $table->foreignId('id_anggota')->constrained('members')->onDelete('cascade');
+            $table->string('trans_number', 30);
+            $table->date('return_date');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('borrows');
     }
 };

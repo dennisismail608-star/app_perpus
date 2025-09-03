@@ -34,7 +34,7 @@ class LocationController extends Controller
             [
                 'kode_lokasi' => $request->kode_lokasi,
                 'label' => $request->label,
-                'rak' => $request->rak,
+                'rak' => $request->rak
             ]
         );
         return redirect()->to('lokasi/index');
@@ -68,12 +68,10 @@ class LocationController extends Controller
             'label' => ['required'],
             'rak' => ['required'],
         ];
-
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-
         $location->kode_lokasi = $request->kode_lokasi;
         $location->label = $request->label;
         $location->rak = $request->rak;
