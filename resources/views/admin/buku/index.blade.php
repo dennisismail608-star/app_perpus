@@ -17,7 +17,6 @@
                         <th>Pengarang</th>
                         <th>Penerbit</th>
                         <th>Tahun Terbit</th>
-                        <th>Stock</th>
                         <th>Actions</th>
                     </tr>
                     @php
@@ -33,11 +32,10 @@
                             <td>{{ $item->pengarang }}</td>
                             <td>{{ $item->penerbit }}</td>
                             <td>{{ $item->tahun_terbit }}</td>
-                            <td>{{ $item->stock }}</td>
                             <td>
                                 <a href="{{ route('buku.edit', $item->id) }}" class="btn btn-success">Edit</a>
-                                <form action="{{ route('buku.destroy', $item->id) }}" method="post"
-                                    style="display: inline" onclick="return confirm('Yakin ingin delete ?')">
+                                <form action="{{ route('buku.destroy', $item->id) }}" method="post" style="display: inline"
+                                    onclick="return confirm('Yakin ingin delete ?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>

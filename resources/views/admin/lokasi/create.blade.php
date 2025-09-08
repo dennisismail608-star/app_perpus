@@ -1,24 +1,40 @@
 @extends('app')
-@section('title', 'Create Location of Books')
+@section('title', "Create Location")
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <div class="card-title">Create Location</div>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('lokasi.store') }}" method="post">
-                @csrf
-                <label for="" class="form-label">Kode Lokasi</label>
-                <input type="text" class="form-control" name="kode_lokasi">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            @foreach ($errors->all() as $keyerror)
+                <ul style="background-color: red">
+                    <li>{{ $keyerror }}</li>
+                </ul>
+            @endforeach
+            <div class="card-body">
+                <h3 class="card-title">{{ $title }}</h3>
+                <form action="{{ route('lokasi.store') }}" method="post">
+                    @csrf
+                    <div class="mb-3">
+                    <label for="" class="form-label">Kode Lokasi</label>
+                    <input type="text" class="form-control" placeholder="Kode Lokasi" required name="location_code" value="{{ old('location_code') }}">
+                    </div>
+                    <div class="mb-3">
+                    <label for="" class="form-label">Label</label>
+                    <input type="text" class="form-control" placeholder="Input label" required name="label" value="{{ old('label') }}">
+                    </div>
+                    <div class="mb-3">
+                    <label for="" class="form-label">Rak</label>
+                    <input type="text" class="form-control" placeholder="Input Rak" required name="shelf" value="{{ old('shelf') }}">
+                    </div>
 
-                <label for="" class="form-label">Label</label>
-                <input type="text" class="form-control" name="label">
+                    <div class="mb-3">
+                        <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
+                        <a href="{{ url('location/index') }}">Kembali</a>
+                    </div>
+                </form>
 
-                <label for="" class="form-label">Rak Buku</label>
-                <input type="text" class="form-control" name="rak">
-
-                <button type="submit" class="btn btn-primary mt-2">Kirim</button>
-            </form>
+            </div>
         </div>
     </div>
+</div>
+
 @endsection

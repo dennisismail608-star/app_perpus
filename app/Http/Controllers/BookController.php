@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\book;
-use App\Models\category;
+use App\Models\Book;
+use App\Models\Category;
 use App\Models\location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = book::orderBy('id', 'DESC')->get();
+        $books = Book::with('lokasi')->orderBy('id', 'DESC')->get();
         return view('admin.buku.index', compact('books'));
     }
 

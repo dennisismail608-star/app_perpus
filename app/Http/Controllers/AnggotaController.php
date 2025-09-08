@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AnggotaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         //SELECT * FROM members;

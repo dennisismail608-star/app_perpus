@@ -12,18 +12,17 @@ class Book extends Model
         'judul',
         'pengarang',
         'penerbit',
-        'tahun_terbit',
+        'tahun_penerbit',
         'keterangan',
-        'stock'
+        'stock',
     ];
 
     public function lokasi()
     {
         return $this->belongsTo(location::class, 'id_lokasi', 'id');
     }
-
     public function kategori()
     {
-        return $this->belongsTo(category::class, 'id_kategori', 'id');
+        return $this->belongsTo(Category::class, 'id_kategori', 'id');
     }
 }

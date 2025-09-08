@@ -38,7 +38,6 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    // conversi / ubah tipe data
     protected function casts(): array
     {
         return [

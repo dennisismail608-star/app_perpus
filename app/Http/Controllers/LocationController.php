@@ -22,7 +22,8 @@ class LocationController extends Controller
      */
     public function create()
     {
-        return view('admin.lokasi.create');
+        $title = 'Tambah Lokasi';
+        return view('admin.lokasi.create', compact('title'));
     }
 
     /**
