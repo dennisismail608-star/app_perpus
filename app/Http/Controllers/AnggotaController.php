@@ -6,6 +6,7 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AnggotaController extends Controller
 {
@@ -91,6 +92,7 @@ class AnggotaController extends Controller
     {
         //IBARATNYA : SELECT * FROM members WHERE id = $id
         $member = Member::find($id);
+
         return view('admin.anggota.edit', compact('member'));
     }
 

@@ -110,9 +110,13 @@ class TransactionController extends Controller
      */
     public function destroy(string $id)
     {
-        $borrow = Borrows::find($id);
-        $borrow->detailBorrows->delete();
+        $borrow = Borrows::findOrFail($id);
+
+        // Delete related detail borrow records
+        DetailBorrows::where('id_borrow', $borrow->id)->delete();
+        // Delete the borrow record itself
         $borrow->delete();
+        Alert::success('Berhasil!!', 'Data Berhasil dihapus');  
         return redirect()->to('transaction');
     }
 

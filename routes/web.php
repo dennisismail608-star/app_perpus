@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\HomeController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,8 +19,10 @@ Route::get('login', [\App\Http\Controllers\LoginController::class, 'login']);
 Route::post('login', [\App\Http\Controllers\LoginController::class, 'actionLogin'])->name('login');
 
 Route::middleware('auth')->group(function () {
-    route::get('dashboard', [\App\Http\Controllers\HomeController::class, 'index']);
+    route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
     route::post('logout', [LoginController::class, 'logout']);
+
+
     //Anggota:
     route::get('anggota/index', [\App\Http\Controllers\AnggotaController::class, 'index']);
     route::get('anggota/create', [AnggotaController::class, 'create']);
@@ -55,11 +59,13 @@ Route::middleware('auth')->group(function () {
     route::put('buku/update/{id}', [BookController::class, 'update'])->name('buku.update');
 
     //Transaction
-    Route::resource('transaction', App\Http\Controllers\TransactionController::class);
+    Route::resource('transaction', App\Http\Controllers\TransactionController::class)->middleware('role:user');
     Route::get('get-buku/{id}', [\App\Http\Controllers\TransactionController::class, 'getBukuByIdCategory']);
     Route::get('print-peminjam/{id}', [\App\Http\Controllers\TransactionController::class, 'print'])->name('print-peminjam');
     Route::post('transaction/{id}/return', [\App\Http\Controllers\TransactionController::class, 'returnBook'])->name('transaction.return');
 
     Route::resource('role', App\Http\Controllers\RoleController::class);
-
+    Route::resource('user', App\Http\Controllers\UserController::class);
+    route::get('user/{id}/roles', [App\Http\Controllers\UserController::class, 'editRole'])->name('user.roles');
+    route::post('user/{id}/updateRoles', [App\Http\Controllers\UserController::class, 'updateRoles'])->name('user.updateRoles');
 });
